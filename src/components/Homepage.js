@@ -96,7 +96,7 @@ const Homepage = () => {
           const seconds = currentDate.getSeconds();
     
           // Check if it's midnight (00:00:00)
-          if (hours === 0 && minutes === 0 && seconds === 0) {
+          if (hours === 12 && minutes === 9 && seconds === 0) {
             let code = '';
             const numbers = [0,1,2,3,4,5,6,7,8,9];
             for (let i = 0; i < 4; i++) {
