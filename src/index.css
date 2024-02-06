@@ -117,7 +117,7 @@ input{
 }
 
 .keysz{
-  padding: 40px 40px;
+  padding: 5px 40px 30px 40px;
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
@@ -132,7 +132,7 @@ button:disabled{
 }
 
 .game{
-  padding: 60px 40px;
+  padding: 5px 40px;
   display: flex;
   flex-wrap: wrap;
   justify-content: space-between;
