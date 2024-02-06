@@ -6,12 +6,33 @@ const Homepage = () => {
 
     const numberKey = ['1','2','3','4','5','6','7','8','9','0']
 
+
+    // State to store the generated number //pass the generated number to this state
+    const [generatedNumber, setGeneratednumber] = useState('');
+
+    const numbs = [
+        { day: 2, numb: '1649' }, { day: 3, numb: '5748' },{ day: 4, numb: '1039' },{ day: 5, numb: '3826' },
+        { day: 6, numb: '9023' },{ day: 7, numb: '1736' },{ day: 8, numb: '8372' },{ day: 9, numb: '7241' },
+        { day: 10, numb: '1234' },{ day: 11, numb: '1234' },{ day: 12, numb: '1234' },{ day: 13, numb: '1234' }
+    ]
+
+
+    //changing number by day
+    useEffect(() => {
+        const currentDay = new Date().getUTCDate() % numbs.length || numbs.length;
+        const selectedNumb = numbs.find(numbObj => numbObj.day === currentDay );
+        
+        if (selectedNumb) {
+            setGeneratednumber(selectedNumb.numb);
+        }
+    }, [numbs]);
+
     //get name from local storage
     const storedUser = JSON.parse(localStorage.getItem('name'));
 
 
     //the rules modal pop up
-    const [rules, setRules] = useState(false);
+    const [rules, setRules] = useState(true);
 	const handleRules =() => {
 		setRules(!rules)
 	};
@@ -22,6 +43,7 @@ const Homepage = () => {
     const [guess, setGuess] =useState('')
     const [selectedNumbers, setSelectednumbers] = useState([]);
     const [disabledButton, setDisableButton] = useState(false)
+    const [dischkbtn, setDischkbtn] = useState(false)
     const handleKeys = (key) => {
         if (!selectedNumbers.includes(key) && selectedNumbers.length < 4) {
             setGuess(guess + key)
@@ -43,19 +65,28 @@ const Homepage = () => {
     const [guessed, setGuessed] = useState([]);
     const [result, setResult] = useState('')
     const [inputed, setInputed] = useState('')
+    const [congrats, setCongrats] = useState(false);
+    const handleCongrats =() => {
+		setCongrats(!congrats)
+	};
+    const currentDay = new Date().getUTCDate()
 
 
-    //on every reload, get and display stored data or guessed numbers
+    //on every reload, get and display stored data or guessed numbers of ONLY THAT DAY
     useEffect(() => {
-
+        
         const storedData = JSON.parse(localStorage.getItem('guessed'));
         if (storedData) {
-            setGuessed(storedData);
+            //setGuessed(storedData);
+            const parsedData = storedData
+            const filteredData = parsedData.filter(item => item.day === currentDay);
+            setGuessed(filteredData);
         }
         //that is if there is items inside the storeddata, put it inside guessed  
+        //.filter(item => item.day === currentDay )
 
     }, []);
-
+        
 
 
     //on every reload of the page, put guessed list or array in the local storage
@@ -65,66 +96,18 @@ const Homepage = () => {
     }, [guessed])
 
 
-    
-
-    // State to store the generated number //pass the generated number to this state
-    const [generatedNumber, setGeneratednumber] = useState('');
-
-    //on every reload, get and display stored data or guessed numbers
+    //on reload check if you completed the quiz for that day already
     useEffect(() => {
 
-        const storedcode = JSON.parse(localStorage.getItem('generatedNumber'));
-        if (storedcode) {
-            setGeneratednumber(storedcode);
+        const completed = guessed.find(item => item.guess === generatedNumber)
+        if (completed) {
+            setRules(!rules)
+            setCongrats(!congrats)
+            setDisableButton(true)
+            setDischkbtn(true)
         }
-        //that is if there is items inside the storeddata, put it inside guessed  
-
-    }, []);
-    
-    useEffect(() => {
-        localStorage.setItem('generatedNumber', JSON.stringify(generatedNumber));
-        
-    }, [generatedNumber])
-    
-
-    useEffect(() => {
-
-        const intervalId = setInterval(() => {
-          const currentDate = new Date();
-          const hours = currentDate.getHours();
-          const minutes = currentDate.getMinutes();
-          const seconds = currentDate.getSeconds();
-    
-          // Check if it's midnight (00:00:00)
-          if (hours === 12 && minutes === 20 && seconds === 0) {
-            let code = '';
-            const numbers = [0,1,2,3,4,5,6,7,8,9];
-            for (let i = 0; i < 4; i++) {
-                const randomIndex = Math.floor(Math.random() * numbers.length);
-                code += numbers[randomIndex];
-                numbers.splice(randomIndex, 1);
-            }
-            setGeneratednumber(code);
-          }
-        }, 1000); // Check every second
-    
-        // Clear the interval when the component is unmounted
-        return () => clearInterval(intervalId);
-    }, [generatedNumber]); // Run the effect only once when the component mounts
-
-    //let computer generate random 4 digit number that will be guessed
-	/*function generateNumber() {
-		let code = '';
-		const numbers = [0,1,2,3,4,5,6,7,8,9];
-		for (let i = 0; i < 4; i++) {
-            const randomIndex = Math.floor(Math.random() * numbers.length);
-            code += numbers[randomIndex];
-            numbers.splice(randomIndex, 1);
-		}
-		return code;
-
-	};*/
-
+         
+    }, [generatedNumber]);
 
 
     //on click of the button to check the guess and display the answer
@@ -143,6 +126,8 @@ const Homepage = () => {
 		if (dead === 4) {
 			setResult(`Congratulations! You guessed the code within ${((guessed.length) + 1)} trial(s)`);
             setDisableButton(true);
+            setDischkbtn(true)
+            setCongrats(true)
 		} else {
 			setResult(`${injured}  Injured, ${dead}  dead`);
             setDisableButton(false);
@@ -167,14 +152,16 @@ const Homepage = () => {
     before adding to the guessed local storage. 
     */
     useEffect(() => {
+        
         // Create a new object with the current guess and result
-        const newGuess = { guess: inputed, result: result };
+        const newGuess = { guess: inputed, result: result, day: currentDay };
 
         if (newGuess.guess.trim() !== ''){
             setGuessed(prevGuessed => [...prevGuessed, newGuess]);
         }
-    }, [inputed, result])
+    }, [inputed, result, currentDay])
 
+	
 
 
     return (
@@ -195,8 +182,21 @@ const Homepage = () => {
                         </div>
                     </div>
                 }
+                {congrats &&
+                    <div className="rules">
+                        <div className="rul">
+                            <span>
+                                <h4 onClick={handleCongrats} style={{cursor:'pointer'}}>X</h4>
+                            </span>
+                            <p>
+                                Congratulations! You guessed the code. 
+                                come back tommorow
+                            </p>
+                        </div>
+                    </div>
+                }
 
-                <h1> Hello, {storedUser}</h1>
+                <h1 style={{paddingLeft: '40px'}}> Hello, {storedUser}</h1>
 
 
                 <div className="game">
@@ -208,36 +208,41 @@ const Homepage = () => {
                                 onChange={(e) => setGuess(e.target.value)}
                                 disabled
                             />
-                            
-                            <button type="submit" onClick={checkGuess}>check</button>
                         </form>
-
-                        {generatedNumber}
-
-
-
-                        <div className='keysz'>
-                            {numberKey.map((keys) => (
-                                <button key={keys} 
-                                    className="kkey"
-                                    onClick={() => handleKeys(keys)}
-                                    disabled={disabledButton || selectedNumbers.includes(keys)}
-                                >
-                                    {keys}
-                                </button>
-                            ))}
-                            <button onClick={backspace}> ⇐ </button>
-                        </div>
                     </div>
                     
 
                     <div className="rtside">
-                        
                         {guessed.map((each, index) => (
                             <div key={index}>
                                 {each.guess} : {each.result}
                             </div>
                         ))} 
+                        {/*{(guessed.filter(item => item.day === currentDay)).map((each, index) => (
+                            <div key={index}>
+                                {each.guess} : {each.result}
+                            </div>
+                        ))}*/}
+                    </div>
+
+
+                    <div className='keysz'>
+                        {numberKey.map((keys) => (
+                            <button key={keys} 
+                                className="kkey"
+                                onClick={() => handleKeys(keys)}
+                                disabled={disabledButton || selectedNumbers.includes(keys)}
+                            >
+                                {keys}
+                            </button>
+                        ))}
+                        <button onClick={backspace}> ⇐ </button>
+                        <button type="submit" onClick={checkGuess} disabled={dischkbtn} className="chkbtn"
+                            style={{marginLeft: '20px', background:'#00ff9d', color:'black', 
+                            border:'none', padding:'10px 20px'}}
+                        >
+                            check
+                        </button>
                     </div>
                 </div>
             </div>
@@ -247,6 +252,7 @@ const Homepage = () => {
  
 export default Homepage;
 
-//generate obce a day
+
 //if you rekload and you have completed the quiz yoi cant play again until next day or change in gen num
+//if the next day comes, it clears the guessed storage
 //share result

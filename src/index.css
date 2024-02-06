@@ -32,6 +32,7 @@ nav{
   color: #fff;
   height: 100vh;
   position: relative;
+  overflow: hidden;
 }
 
 
@@ -109,15 +110,19 @@ input{
 
 .kkey{
   padding: 5px 10px;
-  margin: 20px 5px;
+  margin: 20px 11px;
+  font-size: 30px;
   color: white;
   background: #151616;
 }
 
-.keysz button:disabled{
+button:disabled{
   background: #a39393;
 }
 
+.chkbtn:disabled{
+  background: #3b6153;
+}
 
 .game{
   padding: 60px 40px;
@@ -131,4 +136,13 @@ input{
 .rtside{
   width: 50%;
   text-align: center;
+}
+
+
+@media (max-width: 660px) {
+  .lftside input{
+    margin: 20px 10px 300px 0px;
+    font-weight: 600;
+    font-size: 50px;
+  }
 }

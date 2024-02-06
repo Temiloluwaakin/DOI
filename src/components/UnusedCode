@@ -1,0 +1,54 @@
+/*//on every reload, get and display stored data or guessed numbers
+    useEffect(() => {
+
+        const storedcode = JSON.parse(localStorage.getItem('generatedNumber'));
+        if (storedcode) {
+            setGeneratednumber(storedcode);
+        }
+        //that is if there is items inside the storeddata, put it inside guessed  
+
+    }, []);
+    
+    useEffect(() => {
+        localStorage.setItem('generatedNumber', JSON.stringify(generatedNumber));
+        
+    }, [generatedNumber])
+    
+
+    useEffect(() => {
+
+        const intervalId = setInterval(() => {
+          const currentDate = new Date();
+          const hours = currentDate.getHours();
+          const minutes = currentDate.getMinutes();
+          const seconds = currentDate.getSeconds();
+    
+          // Check if it's midnight (00:00:00)
+          if (hours === 12 && minutes === 20 && seconds === 0) {
+            let code = '';
+            const numbers = [0,1,2,3,4,5,6,7,8,9];
+            for (let i = 0; i < 4; i++) {
+                const randomIndex = Math.floor(Math.random() * numbers.length);
+                code += numbers[randomIndex];
+                numbers.splice(randomIndex, 1);
+            }
+            setGeneratednumber(code);
+          }
+        }, 1000); // Check every second
+    
+        // Clear the interval when the component is unmounted
+        return () => clearInterval(intervalId);
+    }, [generatedNumber]); // Run the effect only once when the component mounts
+
+    //let computer generate random 4 digit number that will be guessed
+	function generateNumber() {
+		let code = '';
+		const numbers = [0,1,2,3,4,5,6,7,8,9];
+		for (let i = 0; i < 4; i++) {
+            const randomIndex = Math.floor(Math.random() * numbers.length);
+            code += numbers[randomIndex];
+            numbers.splice(randomIndex, 1);
+		}
+		return code;
+
+	};*/
