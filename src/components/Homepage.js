@@ -28,7 +28,7 @@ const Homepage = () => {
     }, [numbs]);
 
     //get name from local storage
-    const storedUser = JSON.parse(localStorage.getItem('name'));
+    //const storedUser = JSON.parse(localStorage.getItem('name'));
 
 
     //the rules modal pop up
@@ -196,8 +196,6 @@ const Homepage = () => {
                     </div>
                 }
 
-                <h1 style={{paddingLeft: '40px'}}> Hello, {storedUser}</h1>
-
 
                 <div className="game">
                     <div className='lftside'>
@@ -224,26 +222,25 @@ const Homepage = () => {
                             </div>
                         ))}*/}
                     </div>
+                </div>
 
-
-                    <div className='keysz'>
-                        {numberKey.map((keys) => (
-                            <button key={keys} 
-                                className="kkey"
-                                onClick={() => handleKeys(keys)}
-                                disabled={disabledButton || selectedNumbers.includes(keys)}
-                            >
-                                {keys}
-                            </button>
-                        ))}
-                        <button onClick={backspace}> ⇐ </button>
-                        <button type="submit" onClick={checkGuess} disabled={dischkbtn} className="chkbtn"
-                            style={{marginLeft: '20px', background:'#00ff9d', color:'black', 
-                            border:'none', padding:'10px 20px'}}
+                <div className='keysz'>
+                    {numberKey.map((keys) => (
+                        <button key={keys} 
+                            className="kkey"
+                            onClick={() => handleKeys(keys)}
+                            disabled={disabledButton || selectedNumbers.includes(keys)}
                         >
-                            check
+                            {keys}
                         </button>
-                    </div>
+                    ))}
+                    <button onClick={backspace}> ⇐ </button>
+                    <button type="submit" onClick={checkGuess} disabled={dischkbtn} className="chkbtn"
+                        style={{marginLeft: '20px', background:'#00ff9d', color:'black', 
+                        border:'none', padding:'10px 20px'}}
+                    >
+                        check
+                    </button>
                 </div>
             </div>
         </div>
