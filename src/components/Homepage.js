@@ -212,7 +212,7 @@ const Homepage = () => {
 
                     <div className="rtside">
                         {guessed.map((each, index) => (
-                            <div key={index}>
+                            <div key={index} className="gg">
                                 {each.guess} : {each.result}
                             </div>
                         ))} 
@@ -234,7 +234,9 @@ const Homepage = () => {
                             {keys}
                         </button>
                     ))}
-                    <button onClick={backspace}> ⇐ </button>
+                    <button onClick={backspace} 
+                        style={{padding: '10px', background:'#151616',color:'#fff',  }}
+                    > ⇐ </button>
                     <button type="submit" onClick={checkGuess} disabled={dischkbtn} className="chkbtn"
                         style={{marginLeft: '20px', background:'#00ff9d', color:'black', 
                         border:'none', padding:'10px 20px'}}
