@@ -109,7 +109,7 @@ footer{
 
 .kkey{
   padding: 8px 13px;
-  margin: 15px 11px;
+  margin: 12px 9px;
   font-size: 30px;
   color: white;
   background: #464646;
@@ -118,7 +118,7 @@ footer{
 }
 
 .keysz{
-  padding: 10px 50px 50px 40px;
+  padding: 10px 50px 40px 40px;
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
@@ -133,7 +133,7 @@ button:disabled{
 }
 
 .game{
-  padding: 20px 40px;
+  padding: 10px 40px;
   display: flex;
   height: 350px;
   flex-wrap: wrap;
