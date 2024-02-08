@@ -24,7 +24,7 @@ nav{
 }
 #circled-letter{
   padding: 10px 15px;
-  background-color: rgb(78, 143, 18);
+  background-color: #00ff9d;
   border-radius: 50%;
   cursor: pointer;
 }
@@ -45,7 +45,6 @@ footer{
 }
 
 
-
 .rules{
   background: #201f1f9d;
   position: absolute;
@@ -55,20 +54,32 @@ footer{
   align-items: center;
   align-items: center;
   width: inherit;
-  height: 88%;
+  height: 90%;
   z-index: 999;
 }
+
+
 .rul{
+  transition: transform 2s ease;
   background: #0c0c0c;
-  width: 40%;
+  width: 100%;
+  height: 50%;
+  align-self: flex-end;
   padding: 20px 30px 20px 30px;
   text-align: justify;
   border-radius: 10px 10px 0 0;
   color: #fff;
   border: 1px solid #00ff9d;
+  animation: swipe-up 0.2s linear;
 }
-
-
+@keyframes swipe-up {
+  from {
+    transform: translateY(100%);
+  }
+  to {
+    transform: translateY(0%);
+  }
+}
 
 
 .ruless{
@@ -97,15 +108,17 @@ footer{
 }
 
 .kkey{
-  padding: 5px 10px;
-  margin: 20px 11px;
+  padding: 8px 13px;
+  margin: 15px 11px;
   font-size: 30px;
   color: white;
-  background: #151616;
+  background: #464646;
+  border-radius: 10px;
+  border: none;
 }
 
 .keysz{
-  padding: 5px 40px 50px 40px;
+  padding: 10px 50px 50px 40px;
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
@@ -122,7 +135,7 @@ button:disabled{
 .game{
   padding: 20px 40px;
   display: flex;
-  height: 300px;
+  height: 350px;
   flex-wrap: wrap;
   justify-content: space-between;
 }
