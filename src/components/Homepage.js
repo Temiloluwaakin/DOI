@@ -13,7 +13,11 @@ const Homepage = () => {
     const numbs = [
         { day: 2, numb: '1649' }, { day: 3, numb: '5748' },{ day: 4, numb: '1039' },{ day: 5, numb: '3826' },
         { day: 6, numb: '9023' },{ day: 7, numb: '1736' },{ day: 8, numb: '8372' },{ day: 9, numb: '7241' },
-        { day: 10, numb: '1234' },{ day: 11, numb: '1234' },{ day: 12, numb: '1234' },{ day: 13, numb: '1234' }
+        { day: 10, numb: '0363' },{ day: 11, numb: '9845' },{ day: 12, numb: '1394' },{ day: 13, numb: '0473' },
+        { day: 14, numb: '0482' },{ day: 15, numb: '1732' },{ day: 16, numb: '8573' },{ day: 17, numb: '9203' },
+        { day: 18, numb: '0937' },{ day: 19, numb: '2719' },{ day: 20, numb: '1742' },{ day: 21, numb: '9547' },
+        { day: 22, numb: '5739' },{ day: 23, numb: '3928' },{ day: 24, numb: '0923' },{ day: 25, numb: '1837' },
+        { day: 26, numb: '1039' },{ day: 27, numb: '2910' },{ day: 28, numb: '2834' },{ day: 29, numb: '9845' }
     ]
 
 
@@ -25,6 +29,7 @@ const Homepage = () => {
         if (selectedNumb) {
             setGeneratednumber(selectedNumb.numb);
         }
+        console.log(currentDay)
     }, [numbs]);
 
     //get name from local storage

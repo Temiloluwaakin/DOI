@@ -37,7 +37,7 @@ const Welcome = () => {
                     <input
                         type="text"
                         id='name'
-                        placeholder="What is your name?"
+                        placeholder="Who is playing?"
                         required
                         value= {name}
                         onChange={(e) => setName(e.target.value)}
