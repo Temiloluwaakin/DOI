@@ -11,7 +11,7 @@ const Homepage = () => {
     const [generatedNumber, setGeneratednumber] = useState('');
 
     const numbs = [{ day: 1, numb: '6735' },
-        { day: 2, numb: '1649' }, { day: 3, numb: '5748' },{ day: 4, numb: '1039' },{ day: 5, numb: '3826' },
+        { day: 2, numb: '4940' }, { day: 3, numb: '5748' },{ day: 4, numb: '1039' },{ day: 5, numb: '3826' },
         { day: 6, numb: '9023' },{ day: 7, numb: '1736' },{ day: 8, numb: '8372' },{ day: 9, numb: '7241' },
         { day: 10, numb: '0363' },{ day: 11, numb: '9845' },{ day: 12, numb: '1394' },{ day: 13, numb: '0473' },
         { day: 14, numb: '0482' },{ day: 15, numb: '1732' },{ day: 16, numb: '8573' },{ day: 17, numb: '9203' },
@@ -119,29 +119,33 @@ const Homepage = () => {
     const checkGuess = (e) => {
         e.preventDefault();
 
-		let dead = 0;
-		let injured = 0;
-		for (let i = 0; i < 4; i++) {
-			if (guess[i] === generatedNumber[i]) {
-				dead++;
-			} else if (generatedNumber.includes(guess[i])) {
-				injured++;
-			}
-		}
-		if (dead === 4) {
-			setResult(`Congratulations! You guessed the code within ${((guessed.length) + 1)} trial(s)`);
-            setDisableButton(true);
-            setDischkbtn(true)
-            setCongrats(true)
-		} else {
-			setResult(`${injured}  Injured, ${dead}  dead`);
-            setDisableButton(false);
-		}
+        if (selectedNumbers.length < 3) {
+            alert('not 4 numbers')
+        } else {
 
-        setInputed(guess)
-        setGuess('')
-        setSelectednumbers([])
+            let dead = 0;
+            let injured = 0;
+            for (let i = 0; i < 4; i++) {
+                if (guess[i] === generatedNumber[i]) {
+                    dead++;
+                } else if (generatedNumber.includes(guess[i])) {
+                    injured++;
+                }
+            }
+            if (dead === 4) {
+                setResult(`Congratulations! You guessed the code within ${((guessed.length) + 1)} trial(s)`);
+                setDisableButton(true);
+                setDischkbtn(true)
+                setCongrats(true)
+            } else {
+                setResult(`${injured}  Injured, ${dead}  dead`);
+                setDisableButton(false);
+            }
 
+            setInputed(guess)
+            setGuess('')
+            setSelectednumbers([])
+        }
         /*
         
         
