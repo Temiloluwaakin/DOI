@@ -119,7 +119,7 @@ const Homepage = () => {
     const checkGuess = (e) => {
         e.preventDefault();
 
-        if (selectedNumbers.length < 3) {
+        if (selectedNumbers.length < 4) {
             alert('not 4 numbers')
         } else {
 
