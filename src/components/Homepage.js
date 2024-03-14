@@ -10,7 +10,7 @@ const Homepage = () => {
     // State to store the generated number //pass the generated number to this state
     const [generatedNumber, setGeneratednumber] = useState('');
 
-    const numbs = [
+    const numbs = [{ day: 1, numb: '6735' },
         { day: 2, numb: '1649' }, { day: 3, numb: '5748' },{ day: 4, numb: '1039' },{ day: 5, numb: '3826' },
         { day: 6, numb: '9023' },{ day: 7, numb: '1736' },{ day: 8, numb: '8372' },{ day: 9, numb: '7241' },
         { day: 10, numb: '0363' },{ day: 11, numb: '9845' },{ day: 12, numb: '1394' },{ day: 13, numb: '0473' },
@@ -169,6 +169,25 @@ const Homepage = () => {
 	
 
 
+    const handleShareClick = async () => {
+        try {
+          if (navigator.share) {
+            await navigator.share({
+              title: 'Number of Trials',
+              text: `I made ${guessed.length} trials to get something!`,
+            });
+          } else {
+            console.log('Web Share API not supported.');
+            // Handle fallback if the Web Share API is not supported
+          }
+        } catch (error) {
+          console.error('Error sharing:', error);
+          // Handle errors during sharing
+        }
+    };
+
+
+
     return (
         <div className="homepage">
             <Navbar />
@@ -200,6 +219,7 @@ const Homepage = () => {
                                 Congratulations! You guessed the code within {guessed.length} trial(s). 
                                 come back tommorow
                             </p>
+                            <button onClick={handleShareClick}>Share</button>
                         </div>
                     </div>
                 }

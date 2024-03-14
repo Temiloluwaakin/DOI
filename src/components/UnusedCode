@@ -52,3 +52,37 @@
 		return code;
 
 	};*/
+
+
+    
+/*to share the score
+    import React from 'react';
+
+    const TrialComponent = ({ trials }) => {
+      const handleShareClick = async () => {
+        try {
+          if (navigator.share) {
+            await navigator.share({
+              title: 'Number of Trials',
+              text: `I made ${trials} trials to get something!`,
+            });
+          } else {
+            console.log('Web Share API not supported.');
+            // Handle fallback if the Web Share API is not supported
+          }
+        } catch (error) {
+          console.error('Error sharing:', error);
+          // Handle errors during sharing
+        }
+      };
+    
+      return (
+        <div>
+          <p>Number of Trials: {trials}</p>
+          <button onClick={handleShareClick}>Share</button>
+        </div>
+      );
+    };
+    
+    export default TrialComponent;
+    

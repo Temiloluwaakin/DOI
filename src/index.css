@@ -108,6 +108,7 @@ footer{
   color: #fff;
   border: 1px solid #00ff9d;
   animation: swipe-up 0.2s linear;
+  -webkit-animation: swipe-up 0.2s linear;
 }
 @keyframes swipe-up {
   from {
