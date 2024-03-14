@@ -174,9 +174,8 @@ const Homepage = () => {
           if (navigator.share) {
             await navigator.share({
               title: 'Number of Trials',
-              text: `I guessed the code within ${guessed.length} trial(s).
-              Try to guess the code quicker than mine. 
-              https://doi-lime.vercel.app/homepage`,
+              text: `I guessed the code within ${guessed.length} trial(s). Try to guess the code quicker than mine. 
+              https://doi-lime.vercel.app`,
             });
           } else {
             console.log('Web Share API not supported.');
