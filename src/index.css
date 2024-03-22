@@ -31,7 +31,8 @@ nav{
 
 
 .welcome{
-  margin: 50% auto;
+  margin: 0% auto;
+  padding: 50% 0;
   align-self: center;
   text-align: center;
 }
@@ -67,10 +68,9 @@ nav{
 }
 
 .App{
-  background: #000;
+  background: red;
   color: #fff;
   position: relative;
-  overflow: hidden;
   height: 100vh;
 }
 
@@ -79,7 +79,7 @@ footer{
   color: #585656;
   padding: 0px 40px;
   position: absolute;
-  bottom: 5px;
+  bottom: 20px;
 }
 
 
